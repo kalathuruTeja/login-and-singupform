@@ -39,7 +39,7 @@ def isSolvable(puzzle):
         if (pos & 1):
             return ~(invCount & 1)
         else:
-            return invCount & 1
+            return invCount & 1 
      
  
  
