@@ -82,6 +82,15 @@ const LoginForm = () => {
     <input type="radio" name="em"/> Female
     <input type="radio" name="em"/> Custom
 
+      <p> <strong> Upload Your Photo </strong> </p>
+            <input type="file" name="" id="" />
+            
+            <p> <strong> About Yourself </strong> </p>
+            <textarea name="" id="" cols="25" rows="5" placeholder="Let Me Know About Yourself"></textarea>
+            
+            <p> Phone number</p>
+            <input type="text" placeholder= "Enter 10-digits" />
+
     
     <p> <strong> Date Of Birth </strong> </p>
     <select name="" id="">
