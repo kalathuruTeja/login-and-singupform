@@ -1,75 +1,55 @@
-export const isEmail = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
+N=4
+def getInvCount(arr):
+    arr1=[]
+    for y in arr:
+        for x in y:
+            arr1.append(x)
+    arr=arr1
+    inv_count = 0
+    for i in range(N * N - 1):
+        for j in range(i + 1,N * N):
+            
+            if (arr[j] and arr[i] and arr[i] > arr[j]):
+                inv_count+=1
+         
+     
+    return inv_count
+ 
+ 
 
+def findXPosition(puzzle):
+    
+    for i in range(N - 1,-1,-1):
+        for j in range(N - 1,-1,-1):
+            if (puzzle[i][j] == 0):
+                return N - i
+ 
+ 
 
-export const isEmpty = (thing) => {
-    let empty = false;
+def isSolvable(puzzle):
+    
+    invCount = getInvCount(puzzle)
+ 
+    
+    if (N & 1):
+        return ~(invCount & 1)
+ 
+    else:    # grid is even
+        pos = findXPosition(puzzle)
+        if (pos & 1):
+            return ~(invCount & 1)
+        else:
+            return invCount & 1
+     
+ 
+ 
 
-    switch (typeof thing) {
-        case 'undefined':
-            empty = true;
-            break;
-        case 'string':
-            if (thing.trim().length === 0) {
-                empty = true;
-            }
-            break;
-        case 'object':
-            if (thing === null) {
-                empty = true;
-            } else if (Object.keys(thing).length === 0) {
-                empty = true;
-            }
-            break;
-        default:
-            empty = true;
-    }
-
-    return empty;
-}
-
-
-export const isLength = (str, options) => {
-
-    if (isEmpty(options)) {
-        throw new Error("Who will provide the options you?")
-    }
-
-    let isValid = true;
-
-    if (['string', 'number'].indexOf(typeof str) === -1) {
-        isValid = false;
-    } else {
-        // Convert to string incase it's number
-        let len = 0;
-
-        if(options.trim){
-            len = str.toString().trim().length;
-        } else {
-            len = str.toString().length;
-        }
-
-        if (typeof options.lt === 'number' && len >= options.lt) {
-            isValid = false;
-        } else if (typeof options.lte === 'number' && len > options.lte) {
-            isValid = false;
-        } else if (typeof options.gt === 'number' && len <= options.gt) {
-            isValid = false;
-        } else if (typeof options.gte === 'number' && len < options.gte) {
-            isValid = false;
-        }
-    }
-
-    return isValid;
-}
-
-export const isContainWhiteSpace = (str) => {
-
-    if(typeof str === 'string' || typeof str === 'number'){
-        return str.toString().trim().indexOf(' ') !== -1;
-    } else {
-        return false;
-    }
-}
+if __name__ == '__main__':
+ 
+    puzzle =[
+        [12, 1, 10, 2,],
+        [7, 11, 4, 14,],
+        [5, 0, 9, 15,], 
+        [8, 13, 6, 3,],]
+ 
+    print("Solvable") if  isSolvable(puzzle) else print("Not Solvable")
